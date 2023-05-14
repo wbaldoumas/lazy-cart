@@ -12,3 +12,6 @@ dotnet_diagnostic.SA1309.severity = none
 
 # prefix local calls with 'this'
 dotnet_diagnostic.SA1101.severity = none
+
+# arithmetic expressions must declare precedence
+dotnet_diagnostic.SA1407.severity = none

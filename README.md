@@ -21,7 +21,7 @@
 
 ## 🎯 About The Project
 
-A tiny library to lazily generate the Nth cartesian product.
+A tiny library to lazily generate the Nth cartesian product entry.
 
 ### ✨ Features
 
