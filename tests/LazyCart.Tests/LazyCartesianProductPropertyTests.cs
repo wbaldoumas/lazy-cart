@@ -13,8 +13,8 @@ public sealed class LazyCartesianProductPropertyTests
 
     public LazyCartesianProductPropertyTests()
     {
-        _set1 = Enumerable.Range(1, 100000).ToList();
-        _set2 = Enumerable.Range(1, 100000).Select(i => i.ToString(CultureInfo.CurrentCulture)).ToList();
+        _set1 = Enumerable.Range(1, 500000).ToList();
+        _set2 = Enumerable.Range(1, 500000).Select(i => i.ToString(CultureInfo.CurrentCulture)).ToList();
         _subjectUnderTest = new LazyCartesianProduct<int, string>(_set1, _set2);
     }
 

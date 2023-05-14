@@ -62,22 +62,7 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
             );
         }
 
-        return GenerateSamplesLocal();
-
-        IEnumerable<(T1, T2)> GenerateSamplesLocal()
-        {
-            var sampledIndices = new HashSet<BigInteger>();
-
-            while (sampledIndices.Count < (int)sampleSize)
-            {
-                var randomIndex = ThreadLocalRandom.NextBigInteger(0, Size);
-
-                if (sampledIndices.Add(randomIndex))
-                {
-                    yield return this[randomIndex];
-                }
-            }
-        }
+        return GenerateSamplesInternal(sampleSize);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -87,6 +72,21 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
         modulus = dividend % modulus;
 
         return set[(int)modulus];
+    }
+
+    private IEnumerable<(T1, T2)> GenerateSamplesInternal(BigInteger sampleSize)
+    {
+        var sampledIndices = new HashSet<BigInteger>();
+
+        while (sampledIndices.Count < (int)sampleSize)
+        {
+            var randomIndex = ThreadLocalRandom.NextBigInteger(0, Size);
+
+            if (sampledIndices.Add(randomIndex))
+            {
+                yield return this[randomIndex];
+            }
+        }
     }
 
     private void Precompute()
