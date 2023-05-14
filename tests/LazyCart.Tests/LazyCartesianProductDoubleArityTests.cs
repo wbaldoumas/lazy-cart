@@ -5,7 +5,7 @@ using System.Globalization;
 namespace LazyCart.Tests;
 
 [TestFixture]
-public class LazyCartesianProductTests
+public class LazyCartesianProductDoubleArityTests
 {
     private IList<int>? _set1;
     private IList<string>? _set2;
@@ -42,7 +42,7 @@ public class LazyCartesianProductTests
     }
 
     [Test]
-    public void AtIndex_ShouldReturnCorrectTuple()
+    public void AtIndex_ShouldReturnCorrectEntry()
     {
         foreach (var index in Enumerable.Range(0, _set1!.Count * _set2!.Count).ToList())
         {
@@ -71,7 +71,7 @@ public class LazyCartesianProductTests
     }
 
     [Test]
-    public void IndexOf_ShouldThrow_WhenTupleNotInProduct()
+    public void IndexOf_ShouldThrow_WhenEntryNotInProduct()
     {
         var act = () => _subjectUnderTest!.IndexOf((0, "0"));
 

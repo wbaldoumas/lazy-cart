@@ -5,13 +5,13 @@ using PropertyAttribute = FsCheck.Xunit.PropertyAttribute;
 
 namespace LazyCart.Tests;
 
-public sealed class LazyCartesianProductPropertyTests
+public sealed class LazyCartesianProductDoubleArityPropertyTests
 {
     private readonly IList<int>? _set1;
     private readonly IList<string>? _set2;
     private readonly ILazyCartesianProduct<int, string>? _subjectUnderTest;
 
-    public LazyCartesianProductPropertyTests()
+    public LazyCartesianProductDoubleArityPropertyTests()
     {
         _set1 = Enumerable.Range(1, 500000).ToList();
         _set2 = Enumerable.Range(1, 500000).Select(i => i.ToString(CultureInfo.CurrentCulture)).ToList();
@@ -19,7 +19,7 @@ public sealed class LazyCartesianProductPropertyTests
     }
 
     [Property(MaxTest = 100000)]
-    public void AtIndex_ShouldReturnTuple_WhenIndexInRange(NonNegativeInt index)
+    public void AtIndex_ShouldReturnEntry_WhenIndexInRange(NonNegativeInt index)
     {
         if (index.Get < _set1!.Count * _set2!.Count)
         {
@@ -42,7 +42,7 @@ public sealed class LazyCartesianProductPropertyTests
     }
 
     [Property(MaxTest = 100000)]
-    public void IndexOf_ShouldReturnIndex_WhenTupleInProduct(NonNegativeInt item1, NonNegativeInt item2)
+    public void IndexOf_ShouldReturnIndex_WhenEntryInProduct(NonNegativeInt item1, NonNegativeInt item2)
     {
         var entry = (_set1![item1.Get % _set1.Count], _set2![item2.Get % _set2.Count]);
 
