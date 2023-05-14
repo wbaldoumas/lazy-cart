@@ -21,7 +21,7 @@
 
 ## 🎯 About The Project
 
-TBD.
+A tiny library to lazily generate the Nth cartesian product.
 
 ### ✨ Features
 
@@ -83,6 +83,6 @@ Project Link: [https://github.com/wbaldoumas/lazy-cart](https://github.com/wbald
 [last-commit-url]: https://github.com/wbaldoumas/lazy-cart/commits/main
 [github-checks-shield]: https://img.shields.io/github/actions/workflow/status/wbaldoumas/lazy-cart/test.yml?style=for-the-badge
 [github-checks-url]: https://github.com/wbaldoumas/lazy-cart/actions
-[nuget-version-shield]: https://img.shields.io/nuget/v/lazy-cart?style=for-the-badge
-[nuget-downloads-shield]: https://img.shields.io/nuget/dt/lazy-cart?style=for-the-badge
-[nuget-url]: https://www.nuget.org/packages/lazy-cart/
+[nuget-version-shield]: https://img.shields.io/nuget/v/LazyCart?style=for-the-badge
+[nuget-downloads-shield]: https://img.shields.io/nuget/dt/LazyCart?style=for-the-badge
+[nuget-url]: https://www.nuget.org/packages/LazyCart/
