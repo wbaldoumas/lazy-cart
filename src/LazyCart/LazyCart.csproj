@@ -6,8 +6,7 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <Authors>William Baldoumas</Authors>
     <Description>A tiny library to lazily generate the Nth cartesian product.</Description>
     <Copyright>Copyright ©2023 William Baldoumas</Copyright>
