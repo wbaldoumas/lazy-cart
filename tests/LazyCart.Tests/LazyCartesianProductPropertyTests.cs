@@ -50,4 +50,22 @@ public sealed class LazyCartesianProductPropertyTests
 
         result.Should().BeInRange(0, _set1!.Count * _set2!.Count - 1);
     }
+
+    [Property(MaxTest = 100000)]
+    public void GenerateSamples_ShouldReturnDistinctValues(NonNegativeInt sampleSize)
+    {
+        if (sampleSize.Get < _set1!.Count * _set2!.Count)
+        {
+            var samples = _subjectUnderTest!.GenerateSamples(sampleSize.Get).ToList();
+
+            samples.Should().HaveCount(sampleSize.Get);
+            samples.Should().OnlyHaveUniqueItems();
+        }
+        else
+        {
+            var act = () => _subjectUnderTest!.GenerateSamples(sampleSize.Get);
+
+            act.Should().Throw<ArgumentOutOfRangeException>();
+        }
+    }
 }
