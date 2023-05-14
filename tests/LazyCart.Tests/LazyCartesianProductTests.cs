@@ -46,9 +46,11 @@ public class LazyCartesianProductTests
     }
 
     [Test]
-    public void AtIndex_ShouldThrow_WhenIndexOutOfRange()
+    [TestCase(100000000)]
+    [TestCase(-1)]
+    public void AtIndex_ShouldThrow_WhenIndexOutOfRange(int index)
     {
-        var act = () => _subjectUnderTest!.AtIndex(_set1!.Count * _set2!.Count + 1);
+        var act = () => _subjectUnderTest!.AtIndex(index);
 
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
