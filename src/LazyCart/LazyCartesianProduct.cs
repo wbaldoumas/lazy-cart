@@ -10,7 +10,6 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
     private readonly IList<T2> _set2;
     private readonly IList<BigInteger> _dividends;
     private readonly IList<BigInteger> _moduli;
-    private BigInteger _maxSize;
 
     public LazyCartesianProduct(IList<T1> set1, IList<T2> set2)
     {
@@ -18,16 +17,18 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
         _set2 = set2;
         _dividends = new List<BigInteger>();
         _moduli = new List<BigInteger>();
-        _maxSize = BigInteger.One;
+        Size = BigInteger.One;
 
         Precompute();
     }
+
+    public BigInteger Size { get; private set; }
 
     public (T1, T2) this[BigInteger index] => AtIndex(index);
 
     public (T1, T2) AtIndex(BigInteger index)
     {
-        if (index < BigInteger.Zero || index >= _maxSize)
+        if (index < BigInteger.Zero || index >= Size)
         {
             throw new ArgumentOutOfRangeException(nameof(index));
         }
@@ -51,6 +52,19 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
         return index1 * _dividends[0] + index2 * _dividends[1];
     }
 
+    public IEnumerable<(T1, T2)> GenerateSamples(BigInteger sampleSize)
+    {
+        if (sampleSize > Size)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(sampleSize),
+                "Sample size cannot be greater than the total number of possible combinations"
+            );
+        }
+
+        return GenerateSamplesInternal(sampleSize);
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T CalculateItem<T>(BigInteger index, BigInteger dividend, BigInteger modulus, IList<T> set)
     {
@@ -60,10 +74,25 @@ public sealed class LazyCartesianProduct<T1, T2> : ILazyCartesianProduct<T1, T2>
         return set[(int)modulus];
     }
 
+    private IEnumerable<(T1, T2)> GenerateSamplesInternal(BigInteger sampleSize)
+    {
+        var sampledIndices = new HashSet<BigInteger>();
+
+        while (sampledIndices.Count < (int)sampleSize)
+        {
+            var randomIndex = ThreadLocalRandom.NextBigInteger(0, Size);
+
+            if (sampledIndices.Add(randomIndex))
+            {
+                yield return this[randomIndex];
+            }
+        }
+    }
+
     private void Precompute()
     {
-        _maxSize *= _set1.Count;
-        _maxSize *= _set2.Count;
+        Size *= _set1.Count;
+        Size *= _set2.Count;
 
         var factor = BigInteger.One;
 

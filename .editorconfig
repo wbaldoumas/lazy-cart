@@ -15,3 +15,12 @@ dotnet_diagnostic.SA1101.severity = none
 
 # arithmetic expressions must declare precedence
 dotnet_diagnostic.SA1407.severity = none
+
+# the 'new' keyword should be followed by a space
+dotnet_diagnostic.SA1000.severity = none
+
+# closing parenthesis should not be preceded by a space
+dotnet_diagnostic.SA1009.severity = none
+
+# closing parenthesis should be on line of last parameter
+dotnet_diagnostic.SA1111.severity = none

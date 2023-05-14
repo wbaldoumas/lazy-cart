@@ -62,7 +62,7 @@ jobs:
       
     - name: 🎁 pack nuget
       if: env.VERSION_CHANGED == '1'
-      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true --output .
+      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version=${VERSION} --output .
 
     - name: 💌 publish nuget
       if: env.VERSION_CHANGED == '1'

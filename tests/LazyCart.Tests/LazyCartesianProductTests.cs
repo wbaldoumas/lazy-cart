@@ -36,6 +36,12 @@ public class LazyCartesianProductTests
     }
 
     [Test]
+    public void Size_ShouldReturnCorrectSize()
+    {
+        _subjectUnderTest!.Size.Should().Be(_set1!.Count * _set2!.Count);
+    }
+
+    [Test]
     public void AtIndex_ShouldReturnCorrectTuple()
     {
         foreach (var index in Enumerable.Range(0, _set1!.Count * _set2!.Count).ToList())
@@ -68,6 +74,26 @@ public class LazyCartesianProductTests
     public void IndexOf_ShouldThrow_WhenTupleNotInProduct()
     {
         var act = () => _subjectUnderTest!.IndexOf((0, "0"));
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Test]
+    public void GenerateSamples_ShouldReturnDistinctEntries()
+    {
+        var samples = _subjectUnderTest!.GenerateSamples(100).ToList();
+
+        samples.Should().HaveCount(100);
+
+        var distinctSamples = new HashSet<(int, string)>(samples);
+
+        distinctSamples.Should().HaveCount(100);
+    }
+
+    [Test]
+    public void GenerateSamples_ShouldThrow_WhenSampleSizeIsOutOfRange()
+    {
+        var act = () => _subjectUnderTest!.GenerateSamples(_subjectUnderTest.Size + 1).ToList();
 
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
