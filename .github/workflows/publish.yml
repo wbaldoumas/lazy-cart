@@ -65,6 +65,7 @@ jobs:
       uses: alirezanet/publish-nuget@v3.0.4
       with:
         PROJECT_FILE_PATH: src/LazyCart/LazyCart.csproj
+        INCLUDE_SYMBOLS: true
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
 
     - name: 🔨 set up python
