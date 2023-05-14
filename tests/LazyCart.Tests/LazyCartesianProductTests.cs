@@ -46,11 +46,27 @@ public class LazyCartesianProductTests
     }
 
     [Test]
+    public void AtIndex_ShouldThrow_WhenIndexOutOfRange()
+    {
+        var act = () => _subjectUnderTest!.AtIndex(_set1!.Count * _set2!.Count + 1);
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Test]
     public void IndexOf_ShouldReturnCorrectIndex()
     {
         foreach (var (entry, index) in _cartesianProductIndices!)
         {
             _subjectUnderTest!.IndexOf(entry).Should().Be(index);
         }
+    }
+
+    [Test]
+    public void IndexOf_ShouldThrow_WhenTupleNotInProduct()
+    {
+        var act = () => _subjectUnderTest!.IndexOf((0, "0"));
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }
