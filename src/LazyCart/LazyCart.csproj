@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/wbaldoumas/lazy-cart</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageTags>cartesian-product;arithmetic;lazy;math;set-theory</PackageTags>
+    <PackageTags>CartesianProduct;LazyComputation;SetOperations;Math;Biginteger;Combinatorics;Enumerations;Collections;Algorithms;DataStructures;Efficiency;Generics;Performance;Numerics;Indexing</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
     <PackageId>LazyCart</PackageId>
