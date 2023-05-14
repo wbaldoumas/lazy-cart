@@ -1,0 +1,14 @@
+[*.cs]
+
+# require XML documentation
+dotnet_diagnostic.CS1591.severity = none
+dotnet_diagnostic.SA1600.severity = none
+
+# require file header
+dotnet_diagnostic.SA1633.severity = none
+
+# naming conventions
+dotnet_diagnostic.SA1309.severity = none
+
+# prefix local calls with 'this'
+dotnet_diagnostic.SA1101.severity = none
