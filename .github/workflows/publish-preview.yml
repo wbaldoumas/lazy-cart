@@ -31,9 +31,9 @@ jobs:
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
     - name: 🎁 pack nuget
-      run: dotnet pack src/LazyCart/LazyCart.csproj --no-build --configuration Release /p:Version=${VERSION} --output src
+      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version=${VERSION} --output .
 
     - name: 💌 publish preview nuget
-      run: dotnet nuget push src/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY}
+      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY} --skip-duplicate
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
