@@ -75,19 +75,22 @@ var lazyCart = new LazyCartesianProduct<string, string, string, string, string>(
 Now, we can easily get the 20000th possible character configuration:
 
 ```csharp
-var character = lazyCart[20000]; // this returns the 20000th configuration of ("Gnome", "Monk", "Axe", "Plate", "Fire")
+// get the 20000th configuration of ("Gnome", "Monk", "Axe", "Plate", "Fire")
+var character = lazyCart[20000];
 ```
 
 If we want to find the index of a specific character configuration, we can do that as well:
 
 ```csharp
-var index = lazyCart.IndexOf(("Elf", "Mage", "Staff", "Cloth", "Fire")); // returns the index of this character configuration
+// get the index of this character configuration
+var index = lazyCart.IndexOf(("Elf", "Mage", "Staff", "Cloth", "Fire"));
 ```
 
 And if we need to generate a random sample of 10 possible character configurations:
 
 ```csharp
-var sample = lazyCart.GenerateSamples(10); // returns an IEnumerable of 10 random character configurations
+// get an IEnumerable of 10 random character configurations
+var sample = lazyCart.GenerateSamples(10);
 ```
 
 ## 🗺️ Roadmap
