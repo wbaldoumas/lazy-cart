@@ -21,27 +21,77 @@
 
 ## 🎯 About The Project
 
-A tiny library to lazily generate the Nth cartesian product entry.
+LazyCart is a lightweight .NET library designed to lazily generate the Nth entry of the Cartesian product of multiple sets. Cartesian products can grow exponentially in size with the addition of each new set, making it untenable to generate the entire product in memory for larger or more numerous sets.
+
+LazyCart solves this problem by providing a way to generate individual entries of the product on-demand. This allows you to work with very large Cartesian products without the need for enormous amounts of memory. It's also perfect for scenarios where you don't need the full Cartesian product but want to retrieve specific entries or generate a random sample.
+
+LazyCart enables you to find the index of a specific Cartesian product entry, a feature that can be useful when dealing with ordered data sets.
+
+These features make LazyCart a powerful tool for any application that requires efficient and flexible handling of large data sets. This includes a wide range of fields, from data analysis and machine learning to gaming and simulations.
 
 ### ✨ Features
 
-TBD.
+- **Efficient Computation**: LazyCart enables efficient calculation of the Nth entry of the Cartesian product of N sets, allowing for real-time usage without the need to pre-calculate all combinations.
+- **Massive Scale**: Handle Cartesian products of colossal sets or multiple large sets without worrying about memory constraints. This library was built to accommodate use cases with millions or even billions of combinations.
+- **Random Sampling**: Easily generate evenly-distributed, random samples of your Cartesian product entries. This is great for exploratory data analysis or simulations.
+- **Find Index of Entries**: This library allows you to find the index of a specific entry in the Cartesian product, useful for a variety of mathematical and computational applications.
+- **Generic and Type-Safe**: LazyCart is implemented in a generic way, allowing it to work with data of any type. This makes it versatile and ensures type safety in your applications.
+- **Simple API**: The library provides an easy-to-use API, making it straightforward to use in your projects. Its usage is clear and intuitive, and it fits well within the .NET ecosystem.
 
 ## 🤖 Installation
 
 ### 📦 Package Manager
 
-TBD.
+LazyCart is offered as a [NuGet package](https://www.nuget.org/packages/LazyCart) and can be installed with the following command, or your favorite package manager:
+
+```shell
+dotnet add package LazyCart --version 0.4.1
+```
 
 ### 🛠️ Building From Source
 
-To build from source, clone the repository locally and run some flavor of the following command.
+To build from source, clone the repository locally and run some flavor of the following command:
 
-TBD.
+```shell
+git clone https://github.com/wbaldoumas/lazy-cart.git
+cd lazy-cart
+dotnet build src --configuration Release
+```
 
 ## 🌌 Usage
 
-TBD.
+Let's say we're designing a character system for a new online game. We have a number of attributes for our characters, including race, class, weapon, armor type, and skills, with each attribute having many possibilities. We can use LazyCart to generate these combinations.
+
+```csharp
+var races = new List<string> {"Human", "Elf", "Dwarf", "Orc", "Goblin", "Troll", "Gnome"};
+var classes = new List<string> {"Warrior", "Mage", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Monk"};
+var weapons = new List<string> {"Sword", "Staff", "Bow", "Dagger", "Mace", "Axe", "Polearm", "Wand", "Fist Weapon"};
+var armors = new List<string> {"Plate", "Mail", "Leather", "Cloth"};
+var skills = new List<string> {"Fire", "Ice", "Stealth", "Heal", "Shadow", "Light", "Earth", "Wind", "Water", "Arcane"};
+
+var lazyCart = new LazyCartesianProduct<string, string, string, string, string>(races, classes, weapons, armors, skills);
+```
+
+Now, we can easily get the 20000th possible character configuration:
+
+```csharp
+// get the 20000th configuration of ("Gnome", "Monk", "Axe", "Plate", "Fire")
+var character = lazyCart[20000];
+```
+
+If we want to find the index of a specific character configuration, we can do that as well:
+
+```csharp
+// get the index of this character configuration
+var index = lazyCart.IndexOf(("Elf", "Mage", "Staff", "Cloth", "Fire"));
+```
+
+And if we need to generate a random sample of 10 possible character configurations:
+
+```csharp
+// get an IEnumerable of 10 random character configurations
+var sample = lazyCart.GenerateSamples(10);
+```
 
 ## 🗺️ Roadmap
 
