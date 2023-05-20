@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
-Updated README to include overview, list of features, installation, and details on usage.
+Updated README to include an overview, list of features, installation instructions, and details on usage with examples.
 
 ## [0.4.0] 2023-05-19
 
