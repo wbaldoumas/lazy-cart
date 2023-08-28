@@ -45,7 +45,7 @@ These features make LazyCart a powerful tool for any application that requires e
 LazyCart is offered as a [NuGet package](https://www.nuget.org/packages/LazyCart) and can be installed with the following command, or your favorite package manager:
 
 ```shell
-dotnet add package LazyCart --version 0.4.1
+dotnet add package LazyCart --version 0.4.2
 ```
 
 ### 🛠️ Building From Source
