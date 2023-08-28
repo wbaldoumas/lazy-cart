@@ -62,7 +62,7 @@ jobs:
       
     - name: 🎁 pack nuget
       if: env.VERSION_CHANGED == '1'
-      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version=${VERSION} --output .
+      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version="${{ env.VERSION }}" --output .
 
     - name: 💌 publish nuget
       if: env.VERSION_CHANGED == '1'
@@ -70,26 +70,26 @@ jobs:
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
 
-    - name: 🔨 set up python
-      if: env.VERSION_CHANGED == '1'
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+    # - name: 🔨 set up python
+    #   if: env.VERSION_CHANGED == '1'
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: '3.x'
 
-    - name: 📢 extract release notes
-      if: env.VERSION_CHANGED == '1'
-      run: |
-        python scripts/extract_changelog.py CHANGELOG.md latest_release.md
+    # - name: 📢 extract release notes
+    #   if: env.VERSION_CHANGED == '1'
+    #   run: |
+    #     python scripts/extract_changelog.py CHANGELOG.md latest_release.md
 
-    - name: 📑 create github release
-      if: env.VERSION_CHANGED == '1'
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ env.VERSION }}
-        release_name: Release v${{ env.VERSION }}
-        draft: false
-        prerelease: false
-        body_path: latest_release.md
+    # - name: 📑 create github release
+    #   if: env.VERSION_CHANGED == '1'
+    #   id: create_release
+    #   uses: actions/create-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     tag_name: v${{ env.VERSION }}
+    #     release_name: Release v${{ env.VERSION }}
+    #     draft: false
+    #     prerelease: false
+    #     body_path: latest_release.md
