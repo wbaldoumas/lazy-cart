@@ -1,7 +1,7 @@
 name: Publish to NuGet
 
 on:
-  push: 
+  push:
 
 jobs:
   publish:
@@ -29,8 +29,8 @@ jobs:
     - name: 🧹 Trim VERSION variable
       run: echo "VERSION=$(echo "$VERSION" | xargs)" >> $GITHUB_ENV
 
-    - name: 🕵️‍♂️ Debug: Print VERSION variable
-      run: echo "Current VERSION=${{ env.VERSION }}"      
+    - name: 🕵️‍♂️ Print VERSION variable
+      run: echo "Current VERSION=${{ env.VERSION }}"
 
     - name: 🔎 check if version changed
       run: |
