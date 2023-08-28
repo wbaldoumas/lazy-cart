@@ -1,9 +1,7 @@
 name: Publish to NuGet
 
 on:
-  push:
-    branches:
-      - main
+  push: 
 
 jobs:
   publish:
@@ -24,7 +22,7 @@ jobs:
       run: |
         $csprojPath = "src/LazyCart/LazyCart.csproj"
         $csproj = [xml](Get-Content -Path $csprojPath)
-        $version = $csproj.Project.PropertyGroup.Version
+        $version = $csproj.Project.PropertyGroup.Version.Trim()
         echo "Version: $version"
         echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
@@ -60,36 +58,36 @@ jobs:
       if: env.VERSION_CHANGED == '1'
       run: dotnet build src --configuration Release --no-restore
       
-    - name: 🎁 pack nuget
-      if: env.VERSION_CHANGED == '1'
-      run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version="${{ env.VERSION }}" --output .
+    # - name: 🎁 pack nuget
+    #   if: env.VERSION_CHANGED == '1'
+    #   run: dotnet pack src/LazyCart/LazyCart.csproj --configuration Release --include-symbols /p:SymbolPackageFormat=snupkg /p:ContinuousIntegrationBuild=true /p:Version="${{ env.VERSION }}" --output .
 
-    - name: 💌 publish nuget
-      if: env.VERSION_CHANGED == '1'
-      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY} --skip-duplicate
-      env:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+    # - name: 💌 publish nuget
+    #   if: env.VERSION_CHANGED == '1'
+    #   run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY} --skip-duplicate
+    #   env:
+    #     NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
 
-    - name: 🔨 set up python
-      if: env.VERSION_CHANGED == '1'
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+    # - name: 🔨 set up python
+    #   if: env.VERSION_CHANGED == '1'
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: '3.x'
 
-    - name: 📢 extract release notes
-      if: env.VERSION_CHANGED == '1'
-      run: |
-        python scripts/extract_changelog.py CHANGELOG.md latest_release.md
+    # - name: 📢 extract release notes
+    #   if: env.VERSION_CHANGED == '1'
+    #   run: |
+    #     python scripts/extract_changelog.py CHANGELOG.md latest_release.md
 
-    - name: 📑 create github release
-      if: env.VERSION_CHANGED == '1'
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ env.VERSION }}
-        release_name: Release v${{ env.VERSION }}
-        draft: false
-        prerelease: false
-        body_path: latest_release.md
+    # - name: 📑 create github release
+    #   if: env.VERSION_CHANGED == '1'
+    #   id: create_release
+    #   uses: actions/create-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     tag_name: v${{ env.VERSION }}
+    #     release_name: Release v${{ env.VERSION }}
+    #     draft: false
+    #     prerelease: false
+    #     body_path: latest_release.md

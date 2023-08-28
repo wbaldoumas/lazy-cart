@@ -25,7 +25,7 @@
 
   <!-- NuGet Packaging Properties -->
   <PropertyGroup>
-    <Version>0.4.4</Version>
+    <Version>0.4.5</Version>
     <Authors>William Baldoumas</Authors>
     <Description>A tiny library to lazily generate the Nth cartesian product.</Description>
     <Copyright>Copyright ©2023 William Baldoumas</Copyright>
