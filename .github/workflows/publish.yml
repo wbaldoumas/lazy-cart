@@ -22,9 +22,15 @@ jobs:
       run: |
         $csprojPath = "src/LazyCart/LazyCart.csproj"
         $csproj = [xml](Get-Content -Path $csprojPath)
-        $version = $csproj.Project.PropertyGroup.Version.Trim()
+        $version = $csproj.Project.PropertyGroup.Version
         echo "Version: $version"
         echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+    - name: 🧹 Trim VERSION variable
+      run: echo "VERSION=$(echo "$VERSION" | xargs)" >> $GITHUB_ENV
+
+    - name: 🕵️‍♂️ Debug: Print VERSION variable
+      run: echo "Current VERSION=${{ env.VERSION }}"      
 
     - name: 🔎 check if version changed
       run: |
