@@ -1,3 +1,6 @@
+[*]
+insert_final_newline = true
+
 [*.cs]
 
 # require XML documentation
@@ -24,3 +27,7 @@ dotnet_diagnostic.SA1009.severity = none
 
 # closing parenthesis should be on line of last parameter
 dotnet_diagnostic.SA1111.severity = none
+
+[*.{csproj,targets,props}]
+indent_style = space
+indent_size = 2
