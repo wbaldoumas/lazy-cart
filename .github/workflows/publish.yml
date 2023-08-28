@@ -28,6 +28,9 @@ jobs:
         echo "Version: $version"
         echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
+    - name: 🧹 Trim VERSION variable
+      run: echo "VERSION=$(echo "$VERSION" | xargs)" >> $GITHUB_ENV
+
     - name: 🔎 check if version changed
       run: |
         git fetch origin
