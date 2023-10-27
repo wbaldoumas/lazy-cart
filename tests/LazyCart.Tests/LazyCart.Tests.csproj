@@ -24,7 +24,7 @@
     </PackageReference>
     <PackageReference Include="FsCheck" Version="2.16.6" />
     <PackageReference Include="FsCheck.XUnit" Version="2.16.6" />
-    <PackageReference Include="Meziantou.Analyzer" Version="2.0.93">
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.99">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
