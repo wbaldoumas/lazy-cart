@@ -30,7 +30,8 @@ jobs:
         cp TestResults/*/coverage.opencover.xml .
 
     - name: 💌 publish code coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: /home/runner/work/lazy-cart/lazy-cart/tests/LazyCart.Tests/coverage.opencover.xml
         fail_ci_if_error: true
