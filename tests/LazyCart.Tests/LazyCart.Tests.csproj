@@ -24,11 +24,11 @@
     </PackageReference>
     <PackageReference Include="FsCheck" Version="2.16.6" />
     <PackageReference Include="FsCheck.XUnit" Version="2.16.6" />
-    <PackageReference Include="Meziantou.Analyzer" Version="2.0.139">
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.140">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="NUnit" Version="4.0.1" />
     <PackageReference Include="NUnit.Analyzers" Version="4.0.1">
       <PrivateAssets>all</PrivateAssets>
