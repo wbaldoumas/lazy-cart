@@ -75,7 +75,7 @@ jobs:
 
     - name: 🔨 set up python
       if: env.VERSION_CHANGED == '1'
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.x'
 
